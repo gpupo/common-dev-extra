@@ -100,14 +100,24 @@ EOF;
             'rules' => $rules,
             'usingCache' => $usingCache,
         ];
-
     }
 
-    public function getConfig(array $params): ?Config
+    public function getConfig(array $params = []): ?Config
     {
         $rules = $this->config['rules'];
-        $header = sprintf($this->template, $params['project'], $params['author'], $params['url']);
-        $rules['header_comment']['header'] = $header;
+
+        if (!array_key_exists('header', $params)) {
+
+            $vars = [];
+
+            foreach(['project', 'author', 'url'] as $k) {
+                $vars[$k] = array_key_exists($k, $params) ? $params[$k] : 'UNDEFINED';
+            }
+
+            $params['header'] = vsprintf($this->template, $vars);
+        }
+
+        $rules['header_comment']['header'] = $params['header'];
 
         return Config::create()
             ->setRiskyAllowed(true)

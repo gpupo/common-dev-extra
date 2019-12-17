@@ -40,4 +40,19 @@ class CsConfiguratorTest extends TestCaseAbstract
             $this->assertStringContainsString($v, current($config->getRules()['header_comment']));
         }
     }
+
+    public function testCustomTemplate()
+    {
+        $packageInfo = [
+            'header' => 'I got You',
+        ];
+
+        $config = (new CsConfigurator(__DIR__))->getConfig($packageInfo);
+        $this->assertSame('I got You', current($config->getRules()['header_comment']));
+    }
+    public function testWhithoutParameters()
+    {
+        $config = (new CsConfigurator(__DIR__))->getConfig();
+        $this->assertStringContainsString('UNDEFINED', current($config->getRules()['header_comment']));
+    }
 }
