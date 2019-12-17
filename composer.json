@@ -1,0 +1,31 @@
+{
+    "name": "gpupo/common-dev-extra",
+    "description": "Common PHP tool for require-dev env",
+    "homepage": "https://opensource.gpupo.com/common-dev-extra/",
+    "authors": [
+        {
+            "name": "Gilmar Pupo",
+            "email": "contact@gpupo.com"
+        }
+    ],
+    "keywords": ["common", "development"],
+    "license": "MIT",
+    "require": {
+        "gpupo/common-dev": "^5.1",
+        "phpspec/prophecy": "^1.10",
+        "friendsofphp/php-cs-fixer": "^2.16"
+    },
+    "autoload": {
+        "psr-4": {
+            "Gpupo\\CommonDevExtra\\": "src",
+            "Gpupo\\CommonDevExtra\\Tests\\": "tests"
+        }
+    },
+    "require-dev": {
+    },
+    "config": {
+        "preferred-install": "dist"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}
