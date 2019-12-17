@@ -27,6 +27,7 @@
         }
     },
     "require-dev": {
+        "gpupo/common-sdk": "*"
     },
     "config": {
         "preferred-install": "dist"
