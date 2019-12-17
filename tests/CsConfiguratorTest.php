@@ -27,10 +27,17 @@ class CsConfiguratorTest extends TestCaseAbstract
 {
     public function testGetConfig()
     {
-        $header = 'foo-bar';
-        $configurator = new CsConfigurator(__DIR__, $header);
-        $config = $configurator->getConfig();
+        $packageInfo = [
+            'project' => 'foo/bar',
+            'author' => 'Outer Bass <my@basses.com>',
+            'url' => 'https://basses.com/',
+        ];
+
+        $config = (new CsConfigurator(__DIR__))->getConfig($packageInfo);
         $this->assertTrue($config->getRules()['@PHP56Migration']);
-        $this->assertSame($header, current($config->getRules()['header_comment']));
+
+        foreach ($packageInfo as $k => $v) {
+            $this->assertStringContainsString($v, current($config->getRules()['header_comment']));
+        }
     }
 }

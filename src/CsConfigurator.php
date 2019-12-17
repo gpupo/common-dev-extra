@@ -71,7 +71,20 @@ class CsConfigurator
 
     private $config;
 
-    public function __construct($directory, $header, Finder $finder = null, $rules = null, $usingCache = true)
+    private $template = <<<'EOF'
+This file is part of %s
+Created by %s
+For the information of copyright and license you should read the file
+LICENSE which is distributed with this source code.
+Para a informação dos direitos autorais e de licença você deve ler o arquivo
+LICENSE que é distribuído com este código-fonte.
+Para obtener la información de los derechos de autor y la licencia debe leer
+el archivo LICENSE que se distribuye con el código fuente.
+For more information, see <%s>.
+
+EOF;
+
+    public function __construct($directory, Finder $finder = null, $rules = null, $usingCache = true)
     {
         if (empty($finder)) {
             $finder = $this->factoryFinder($directory);
@@ -81,19 +94,27 @@ class CsConfigurator
             $rules = $this->default_rules;
         }
 
-        $rules['header_comment']['header'] = $header;
+        $this->config = [
+            'directory' => $directory,
+            'finder' => $finder,
+            'rules' => $rules,
+            'usingCache' => $usingCache,
+        ];
 
-        $this->config = Config::create()
-            ->setRiskyAllowed(true)
-            ->setRules($rules)
-            ->setFinder($finder)
-            ->setUsingCache($usingCache)
-        ;
     }
 
-    public function getConfig(): ?Config
+    public function getConfig(array $params): ?Config
     {
-        return $this->config;
+        $rules = $this->config['rules'];
+        $header = sprintf($this->template, $params['project'], $params['author'], $params['url']);
+        $rules['header_comment']['header'] = $header;
+
+        return Config::create()
+            ->setRiskyAllowed(true)
+            ->setRules($rules)
+            ->setFinder($this->config['finder'])
+            ->setUsingCache($this->config['usingCache'])
+        ;
     }
 
     protected function factoryFinder($directory)
