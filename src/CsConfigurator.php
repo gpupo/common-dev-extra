@@ -114,7 +114,11 @@ EOF;
                 $vars[$k] = array_key_exists($k, $params) ? $params[$k] : 'UNDEFINED';
             }
 
-            $params['header'] = vsprintf($this->template, $vars);
+            if (!array_key_exists('template', $params)) {
+                $params['template'] = $this->template;
+            }
+
+            $params['header'] = vsprintf($params['template'] , $vars);
         }
 
         $rules['header_comment']['header'] = $params['header'];
