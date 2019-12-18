@@ -61,7 +61,6 @@ Adicione o pacote ao seu projeto utilizando [composer](http://getcomposer.org):
 //.php_cs.dist
 require __DIR__.'/vendor/autoload.php';
 
-
 use Gpupo\CommonDevExtra\CsConfigurator;
 
 $packageInfo = [
@@ -78,3 +77,10 @@ return (new CsConfigurator(__DIR__))->getConfig($packageInfo);
 
 
 	vendor/bin/php-cs-fixer fix
+
+
+### Uso global
+
+You can use with composer global and not require any autoload at ``.php_cs.dist`` file
+
+	composer global require gpupo/common-dev-extra:^1.1.1 --no-cache
