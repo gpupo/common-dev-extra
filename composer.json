@@ -32,6 +32,9 @@
     "config": {
         "preferred-install": "dist"
     },
+    "scripts": {
+        "test": "phpunit"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true
 }
