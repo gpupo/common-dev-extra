@@ -3,16 +3,9 @@
 declare(strict_types=1);
 
 /*
- * This file is part of gpupo/common-dev-extra
- * Created by Gilmar Pupo <contact@gpupo.com>
- * For the information of copyright and license you should read the file
- * LICENSE which is distributed with this source code.
- * Para a informação dos direitos autorais e de licença você deve ler o arquivo
- * LICENSE que é distribuído com este código-fonte.
- * Para obtener la información de los derechos de autor y la licencia debe leer
- * el archivo LICENSE que se distribuye con el código fuente.
- * For more information, see <https://opensource.gpupo.com/>.
- *
+ * This file is part of gpupo/common-dev-extra created by Gilmar Pupo <contact@gpupo.com>
+ * For the information of copyright and license you should read the file LICENSE which is
+ * distributed with this source code. For more information, see <https://opensource.gpupo.com/>
  */
 
 namespace Gpupo\CommonDevExtra;
@@ -99,19 +92,18 @@ EOF;
     {
         $rules = $this->config['rules'];
 
-        if (!array_key_exists('header', $params)) {
-
+        if (!\array_key_exists('header', $params)) {
             $vars = [];
 
-            foreach(['project', 'author', 'url'] as $k) {
-                $vars[$k] = array_key_exists($k, $params) ? $params[$k] : 'UNDEFINED';
+            foreach (['project', 'author', 'url'] as $k) {
+                $vars[$k] = \array_key_exists($k, $params) ? $params[$k] : 'UNDEFINED';
             }
 
-            if (!array_key_exists('template', $params)) {
+            if (!\array_key_exists('template', $params)) {
                 $params['template'] = $this->template;
             }
 
-            $params['header'] = vsprintf($params['template'] , $vars);
+            $params['header'] = vsprintf($params['template'], $vars);
         }
 
         $rules['header_comment']['header'] = $params['header'];
