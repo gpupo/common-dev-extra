@@ -12,10 +12,11 @@ namespace Gpupo\CommonDevExtra;
 
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
+use PhpCsFixer\ConfigInterface;
 
 class CsConfigurator
 {
-    protected $default_rules = [
+    protected array $default_rules = [
         '@PHP56Migration' => true,
         '@PHPUnit60Migration:risky' => true,
         '@Symfony' => true,
@@ -62,15 +63,15 @@ class CsConfigurator
         'native_function_invocation' => ['include' => ['@compiler_optimized'], 'scope' => 'namespaced'],
     ];
 
-    private $config;
+    private array $config;
 
-    private $template = <<<'EOF'
+    private string $template = <<<'EOF'
 This file is part of %s created by %s
 For the information of copyright and license you should read the file LICENSE which is
 distributed with this source code. For more information, see <%s>
 EOF;
 
-    public function __construct($directory, Finder $finder = null, $rules = null, $usingCache = true)
+    public function __construct(string $directory, Finder $finder = null, array $rules = null, bool $usingCache = true)
     {
         if (empty($finder)) {
             $finder = $this->factoryFinder($directory);
@@ -88,7 +89,7 @@ EOF;
         ];
     }
 
-    public function getConfig(array $params = []): ?Config
+    public function getConfig(array $params = []): ?ConfigInterface
     {
         $rules = $this->config['rules'];
 
@@ -116,7 +117,7 @@ EOF;
         ;
     }
 
-    protected function factoryFinder($directory)
+    protected function factoryFinder(string $directory): Finder
     {
         return Finder::create()
             ->notName('LICENSE')
