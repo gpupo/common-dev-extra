@@ -35,7 +35,8 @@
     },
     "scripts": {
         "phpstan": "phpstan analyse -c config/phpstan.neon --no-progress -vvv",
-        "test": "vendor/bin/phpunit"
+        "phpunit": "vendor/bin/phpunit",
+        "test": ["@phpstan", "@phpunit"]
     },
     "minimum-stability": "dev",
     "prefer-stable": true
