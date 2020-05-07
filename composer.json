@@ -34,7 +34,8 @@
         "preferred-install": "dist"
     },
     "scripts": {
-        "test": "phpunit"
+        "phpstan": "phpstan analyse -c config/phpstan.neon --no-progress -vvv",
+        "test": "vendor/bin/phpunit"
     },
     "minimum-stability": "dev",
     "prefer-stable": true
