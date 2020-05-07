@@ -13,7 +13,7 @@
     "require": {
         "gpupo/common-dev": "^5.1",
         "phpspec/prophecy": "^1.10",
-        "friendsofphp/php-cs-fixer": "^2.16",
+        "friendsofphp/php-cs-fixer": "^2.16.3",
         "squizlabs/php_codesniffer": "^3.5",
         "escapestudios/symfony2-coding-standard": "^3.10",
         "phploc/phploc": "^5.0",

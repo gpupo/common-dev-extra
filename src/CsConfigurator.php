@@ -16,11 +16,12 @@ use PhpCsFixer\ConfigInterface;
 
 class CsConfigurator
 {
-    protected array $default_rules = [
+    const DEFAULT_RULES = [
         '@PHP56Migration' => true,
         '@PHPUnit60Migration:risky' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
+        '@PhpCsFixer:risky' => true,
         'align_multiline_comment' => true,
         'array_syntax' => ['syntax' => 'short'],
         'blank_line_before_statement' => true,
@@ -60,7 +61,6 @@ class CsConfigurator
         'strict_param' => true,
         'yoda_style' => true,
         'mb_str_functions' => true,
-        'native_function_invocation' => ['include' => ['@compiler_optimized'], 'scope' => 'namespaced'],
     ];
 
     private array $config;
@@ -78,7 +78,7 @@ EOF;
         }
 
         if (empty($rules)) {
-            $rules = $this->default_rules;
+            $rules = $this::DEFAULT_RULES;
         }
 
         $this->config = [
@@ -89,7 +89,7 @@ EOF;
         ];
     }
 
-    public function getConfig(array $params = []): ?ConfigInterface
+    public function getConfig(array $params = []): ConfigInterface
     {
         $rules = $this->config['rules'];
 
