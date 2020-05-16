@@ -21,7 +21,6 @@ class CsConfigurator
         '@PHPUnit60Migration:risky' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
-        '@PhpCsFixer:risky' => true,
         'align_multiline_comment' => true,
         'array_syntax' => ['syntax' => 'short'],
         'blank_line_before_statement' => true,
@@ -36,7 +35,7 @@ class CsConfigurator
         'heredoc_to_nowdoc' => true,
         'list_syntax' => ['syntax' => 'long'],
         'method_chaining_indentation' => true,
-        'method_argument_space' => ['ensure_fully_multiline' => true],
+        'method_argument_space' => ['on_multiline' => 'ensure_fully_multiline'],
         'multiline_comment_opening_closing' => true,
         'no_extra_blank_lines' => ['tokens' => ['break', 'continue', 'extra', 'return', 'throw', 'use', 'parenthesis_brace_block', 'square_brace_block', 'curly_brace_block']],
         'no_null_property_initialization' => true,
@@ -44,7 +43,7 @@ class CsConfigurator
         'no_superfluous_elseif' => true,
         'no_unneeded_curly_braces' => true,
         'no_unneeded_final_method' => true,
-        'no_unreachable_default_argument_value' => false,
+        'no_unreachable_default_argument_value' => true,
         'no_useless_else' => true,
         'no_useless_return' => true,
         'ordered_class_elements' => true,
@@ -61,6 +60,8 @@ class CsConfigurator
         'strict_param' => true,
         'yoda_style' => true,
         'mb_str_functions' => true,
+        'native_function_invocation' => ['include' => ['@compiler_optimized'], 'scope' => 'namespaced'],
+        "fully_qualified_strict_types" => true,
     ];
 
     private array $config;
