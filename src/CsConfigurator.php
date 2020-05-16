@@ -11,12 +11,12 @@ declare(strict_types=1);
 namespace Gpupo\CommonDevExtra;
 
 use PhpCsFixer\Config;
-use PhpCsFixer\Finder;
 use PhpCsFixer\ConfigInterface;
+use PhpCsFixer\Finder;
 
 class CsConfigurator
 {
-    const DEFAULT_RULES = [
+    protected const DEFAULT_RULES = [
         '@PHP56Migration' => true,
         '@PHPUnit60Migration:risky' => true,
         '@Symfony' => true,
@@ -78,7 +78,7 @@ EOF;
         }
 
         if (empty($rules)) {
-            $rules = $this::DEFAULT_RULES;
+            $rules = self::DEFAULT_RULES;
         }
 
         $this->config = [
