@@ -5,7 +5,7 @@ Extra Tools for PHP package development
 
 ## Requisitos para uso
 
-* PHP *>=7.4*
+* PHP *>=8.0*
 * [Composer Dependency Manager](http://getcomposer.org)
 
 Este componente **não é uma aplicação Stand Alone** e seu objetivo é ser utilizado como biblioteca.
@@ -83,4 +83,4 @@ return (new CsConfigurator(__DIR__))->getConfig($packageInfo);
 
 You can use with composer global and not require any autoload at ``.php_cs.dist`` file
 
-	composer global require gpupo/common-dev-extra:^1.1.1 --no-cache
+	composer global require gpupo/common-dev-extra:dev-master --no-cache
