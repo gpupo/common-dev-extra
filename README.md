@@ -1,6 +1,6 @@
 Extra Tools for PHP package development
 
-[![Build Status](https://secure.travis-ci.org/gpupo/common-dev-extra.png?branch=master)](http://travis-ci.org/gpupo/common-dev-extra)
+[![Build Status](https://secure.travis-ci.org/gpupo/common-dev-extra.png?branch=main)](http://travis-ci.org/gpupo/common-dev-extra)
 
 
 ## Requisitos para uso

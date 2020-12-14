@@ -21,4 +21,4 @@ endif
 
 ## Install PHP libs
 install:
-	composer install --prefer-dist --ignore-platform-reqs --no-scripts
+	composer install --prefer-dist --no-scripts

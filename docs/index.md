@@ -3,12 +3,12 @@ layout: default
 ---
 Extra Tools for PHP package development
 
-[![Build Status](https://secure.travis-ci.org/gpupo/common-dev-extra.png?branch=master)](http://travis-ci.org/gpupo/common-dev-extra)
+[![Build Status](https://secure.travis-ci.org/gpupo/common-dev-extra.png?branch=main)](http://travis-ci.org/gpupo/common-dev-extra)
 
 
 ## Requisitos para uso
 
-* PHP *>=7.4*
+* PHP *>=8.0*
 * [Composer Dependency Manager](http://getcomposer.org)
 
 Este componente **não é uma aplicação Stand Alone** e seu objetivo é ser utilizado como biblioteca.
