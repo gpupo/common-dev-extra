@@ -17,7 +17,6 @@ use PhpCsFixer\Finder;
 class CsConfigurator
 {
     protected const DEFAULT_RULES = [
-        '@PHP56Migration' => true,
         '@PHPUnit60Migration:risky' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
@@ -39,7 +38,7 @@ class CsConfigurator
         'multiline_comment_opening_closing' => true,
         'no_extra_blank_lines' => ['tokens' => ['break', 'continue', 'extra', 'return', 'throw', 'use', 'parenthesis_brace_block', 'square_brace_block', 'curly_brace_block']],
         'no_null_property_initialization' => true,
-        'no_short_echo_tag' => true,
+        'echo_tag_syntax' => true,
         'no_superfluous_elseif' => true,
         'no_unneeded_curly_braces' => true,
         'no_unneeded_final_method' => true,
@@ -61,7 +60,7 @@ class CsConfigurator
         'yoda_style' => true,
         'mb_str_functions' => true,
         'native_function_invocation' => ['include' => ['@compiler_optimized'], 'scope' => 'namespaced'],
-        "fully_qualified_strict_types" => true,
+        'fully_qualified_strict_types' => true,
     ];
 
     private array $config;
@@ -120,7 +119,7 @@ EOF;
 
     protected function factoryFinder(string $directory): Finder
     {
-        return (new Finder)
+        return (new Finder())
             ->notName('LICENSE')
             ->notName('README.md')
             ->notName('phpunit.xml*')
