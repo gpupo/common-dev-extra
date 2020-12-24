@@ -17,7 +17,6 @@ use PhpCsFixer\Finder;
 class CsConfigurator
 {
     protected const DEFAULT_RULES = [
-        '@PHPUnit60Migration:risky' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'align_multiline_comment' => true,
@@ -61,6 +60,7 @@ class CsConfigurator
         'mb_str_functions' => true,
         'native_function_invocation' => ['include' => ['@compiler_optimized'], 'scope' => 'namespaced'],
         'fully_qualified_strict_types' => true,
+        'constant_case' => true,
     ];
 
     private array $config;
@@ -71,28 +71,42 @@ For the information of copyright and license you should read the file LICENSE wh
 distributed with this source code. For more information, see <%s>
 EOF;
 
-    public function __construct(string $directory, Finder $finder = null, array $rules = null, bool $usingCache = true)
+    public function getRules(): array
     {
-        if (empty($finder)) {
-            $finder = $this->factoryFinder($directory);
+        if (empty($this->rules)) {
+            $this->rules = self::DEFAULT_RULES;
         }
 
-        if (empty($rules)) {
-            $rules = self::DEFAULT_RULES;
+        return $this->rules;
+    }
+
+    public function addRules(array $rules): self
+    {
+        $this->rules = array_merge($this->getRules(), $rules);
+
+        return $this;
+    }
+
+    public function getFinder(): Finder
+    {
+        if (empty($this->finder)) {
+            $this->finder = $this->factoryFinder($this->directory);
         }
 
-        $this->config = [
-            'directory' => $directory,
-            'finder' => $finder,
-            'rules' => $rules,
-            'usingCache' => $usingCache,
-        ];
+        return $this->finder;
+    }
+    public function __construct(
+        protected string $directory, 
+        protected Finder|null $finder = null, 
+        protected array $rules = [], 
+        protected bool $usingCache = true,
+        )
+    {
     }
 
     public function getConfig(array $params = []): ConfigInterface
     {
-        $rules = $this->config['rules'];
-
+        $rules = $this->getRules();
         if (!\array_key_exists('header', $params)) {
             $vars = [];
 
@@ -112,8 +126,8 @@ EOF;
         return (new Config())
             ->setRiskyAllowed(true)
             ->setRules($rules)
-            ->setFinder($this->config['finder'])
-            ->setUsingCache($this->config['usingCache'])
+            ->setFinder($this->getFinder())
+            ->setUsingCache($this->usingCache)
         ;
     }
 

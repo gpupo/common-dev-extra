@@ -27,7 +27,7 @@ class CsConfiguratorTest extends TestCaseAbstract
         ];
 
         $config = (new CsConfigurator(__DIR__))->getConfig($packageInfo);
-        $this->assertTrue($config->getRules()['@PHP56Migration']);
+        $this->assertTrue($config->getRules()['@Symfony:risky']);
 
         foreach ($packageInfo as $k => $v) {
             $this->assertStringContainsString($v, current($config->getRules()['header_comment']));
@@ -49,4 +49,22 @@ class CsConfiguratorTest extends TestCaseAbstract
         $config = (new CsConfigurator(__DIR__))->getConfig();
         $this->assertStringContainsString('UNDEFINED', current($config->getRules()['header_comment']));
     }
+
+    public function testAddRules()
+    {
+        $configurator = new CsConfigurator(__DIR__);
+
+        $config = $configurator
+                ->addRules([
+                    'foo' => true,
+                ])
+                ->getConfig([
+                'project' => 'foo/zeta',
+                'author' => 'Outer Guitar <my@guitar.com>',
+                'url' => 'https://guitar.com/',
+                ]);
+
+        $this->assertTrue($config->getRules()['foo']);
+    }
+
 }
