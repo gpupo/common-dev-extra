@@ -110,7 +110,7 @@ EOF;
 
         $rules['header_comment']['header'] = $params['header'];
 
-        return Config::create()
+        return (new Config())
             ->setRiskyAllowed(true)
             ->setRules($rules)
             ->setFinder($this->config['finder'])
@@ -120,7 +120,7 @@ EOF;
 
     protected function factoryFinder(string $directory): Finder
     {
-        return Finder::create()
+        return (new Finder)
             ->notName('LICENSE')
             ->notName('README.md')
             ->notName('phpunit.xml*')
