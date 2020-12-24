@@ -55,10 +55,10 @@ class CsConfiguratorTest extends TestCaseAbstract
         $configurator = new CsConfigurator(__DIR__);
 
         $config = $configurator
-                ->addRules([
+            ->addRules([
                     'foo' => true,
                 ])
-                ->getConfig([
+            ->getConfig([
                 'project' => 'foo/zeta',
                 'author' => 'Outer Guitar <my@guitar.com>',
                 'url' => 'https://guitar.com/',
@@ -66,5 +66,4 @@ class CsConfiguratorTest extends TestCaseAbstract
 
         $this->assertTrue($config->getRules()['foo']);
     }
-
 }

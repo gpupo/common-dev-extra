@@ -17,6 +17,7 @@ use PhpCsFixer\Finder;
 class CsConfigurator
 {
     protected const DEFAULT_RULES = [
+        '@PHP80Migration' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
         'align_multiline_comment' => true,
@@ -61,15 +62,24 @@ class CsConfigurator
         'native_function_invocation' => ['include' => ['@compiler_optimized'], 'scope' => 'namespaced'],
         'fully_qualified_strict_types' => true,
         'constant_case' => true,
+        'no_superfluous_elseif' => true,
     ];
 
     private array $config;
 
     private string $template = <<<'EOF'
-This file is part of %s created by %s
-For the information of copyright and license you should read the file LICENSE which is
-distributed with this source code. For more information, see <%s>
-EOF;
+        This file is part of %s created by %s
+        For the information of copyright and license you should read the file LICENSE which is
+        distributed with this source code. For more information, see <%s>
+        EOF;
+
+    public function __construct(
+        protected string $directory,
+        protected Finder | null $finder = null,
+        protected array $rules = [],
+        protected bool $usingCache = true,
+    ) {
+    }
 
     public function getRules(): array
     {
@@ -94,14 +104,6 @@ EOF;
         }
 
         return $this->finder;
-    }
-    public function __construct(
-        protected string $directory, 
-        protected Finder|null $finder = null, 
-        protected array $rules = [], 
-        protected bool $usingCache = true,
-        )
-    {
     }
 
     public function getConfig(array $params = []): ConfigInterface
